@@ -1,0 +1,627 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cumpleaños de Mariana 🦋</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&family=Playfair+Display:wght@500;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    overflow: hidden;
+}
+
+/* PANTALLAS */
+.pantalla {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.activa {
+    display: flex;
+    animation: aparecer 1s ease;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: scale(1.03); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* PRIMERA PANTALLA */
+#inicio {
+    color: white;
+    background: radial-gradient(circle, #c4a3e6, #76519d, #49305f);
+}
+
+#inicio h1 {
+    font: 700 42px 'Playfair Display', serif;
+    margin-bottom: 25px;
+}
+
+#inicio p {
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.mariposa {
+    border: none;
+    background: transparent;
+    font-size: 120px;
+    cursor: pointer;
+    animation: volar 3s infinite ease-in-out;
+    filter: drop-shadow(0 0 20px white);
+}
+
+@keyframes volar {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+/* SEGUNDA PANTALLA */
+#fiesta {
+    color: white;
+    background: linear-gradient(135deg, #c7a9e5, #9068b5, #67458d);
+}
+
+#fiesta h1 {
+    font: 700 48px 'Playfair Display', serif;
+    z-index: 2;
+}
+
+#fiesta p {
+    margin: 20px;
+    z-index: 2;
+}
+
+.globo {
+    position: absolute;
+    bottom: -120px;
+    width: 60px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--color);
+    animation: subir var(--duracion) linear infinite;
+    animation-delay: var(--retraso);
+}
+
+.globo::after {
+    content: "";
+    position: absolute;
+    height: 70px;
+    border-left: 1px solid white;
+    top: 80px;
+    left: 30px;
+}
+
+@keyframes subir {
+    to { transform: translateY(-120vh); }
+}
+
+.confeti {
+    position: absolute;
+    top: -20px;
+    left: var(--x);
+    width: 9px;
+    height: 14px;
+    background: var(--color);
+    animation: caer var(--duracion) linear infinite;
+    animation-delay: var(--retraso);
+}
+
+@keyframes caer {
+    to { transform: translateY(110vh) rotate(720deg); }
+}
+
+.luces {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, #fff 2px, transparent 5px),
+                radial-gradient(circle at 80% 30%, #fff 2px, transparent 5px),
+                radial-gradient(circle at 50% 80%, #fff 2px, transparent 5px);
+    animation: brillar 1.5s infinite alternate;
+}
+
+@keyframes brillar {
+    from { opacity: .2; }
+    to { opacity: 1; }
+}
+
+/* BOTONES */
+.boton {
+    background: white;
+    color: #76519d;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 25px;
+    z-index: 3;
+    transition: .3s;
+}
+
+.boton:hover {
+    transform: scale(1.08);
+}
+
+/* TERCERA PANTALLA */
+#invitacion {
+    background: linear-gradient(135deg, #eee2f8, #d6c0ec, #f8efff);
+    overflow-y: auto;
+    justify-content: flex-start;
+    height: 100vh;
+    min-height: 100vh;
+    padding: 25px 20px 45px;
+}
+
+.tarjeta {
+    background: #fffaff;
+    padding: 35px;
+    border-radius: 25px;
+    width: min(100%, 550px);
+    box-shadow: 0 15px 50px #76519d44;
+    border: 2px solid white;
+    position: relative;
+    z-index: 2;
+    margin: auto;
+    flex-shrink: 0;
+}
+
+.tarjeta h1 {
+    font: 700 38px 'Playfair Display', serif;
+    color: #76519d;
+    margin: 15px 0;
+}
+
+.tarjeta h2 {
+    color: #a27cc0;
+    font: 600 22px 'Playfair Display', serif;
+}
+
+.tarjeta p {
+    color: #49345d;
+    line-height: 1.7;
+    margin: 15px 0;
+}
+
+.decoracion {
+    font-size: 30px;
+}
+
+.datos {
+    background: #f3eafa;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 12px 0;
+    color: #76519d;
+    text-align: left;
+}
+
+.datos strong {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.despedida {
+    color: #8e6aad !important;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+}
+
+/* RESPUESTA */
+.respuesta h3 {
+    color: #76519d;
+    margin: 20px 0;
+}
+
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.si {
+    background: #8c68ad;
+    color: white;
+}
+
+.no {
+    background: #eee3f6;
+    color: #76519d;
+}
+
+#mensajeRespuesta {
+    color: #76519d;
+    font-weight: bold;
+    min-height: 30px;
+}
+
+/* CAMPO PARA EL NOMBRE */
+#nombreInvitado {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #d6c0ec;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: #49345d;
+    background: white;
+    outline-color: #8c68ad;
+    margin-bottom: 5px;
+}
+
+#nombreInvitado::placeholder {
+    color: #a58bb9;
+}
+
+.si:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+/* MENSAJE DE CONFIRMACIÓN */
+.mensaje-exito {
+    background: #f3eafa;
+    border-radius: 15px;
+    padding: 18px;
+    margin-top: 18px;
+    animation: aparecer 1s ease;
+}
+
+.mensaje-exito h3 {
+    color: #76519d;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+}
+
+.mensaje-exito p {
+    color: #76519d;
+    line-height: 1.6;
+}
+
+@media(max-width: 480px) {
+    .tarjeta {
+        padding: 25px 18px;
+    }
+
+    .tarjeta h1 {
+        font-size: 30px;
+    }
+
+    #inicio h1 {
+        font-size: 32px;
+    }
+
+    #fiesta h1 {
+        font-size: 36px;
+    }
+
+    .mariposa {
+        font-size: 100px;
+    }
+
+    .botones {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .botones .boton {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    #invitacion {
+        padding: 15px 12px 35px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="musica" src="Sofia Carson - I Didn't Know __ Purple Hearts __ Sub. Español _ Lyrics (Corazones Malheridos) [LwndQh2QhPM].mp3" loop></audio>
+
+<!-- PANTALLA 1 -->
+<section id="inicio" class="pantalla activa">
+
+    <p>UNA INVITACIÓN ESPECIAL</p>
+
+    <h1>¡Tengo algo para ti!</h1>
+
+    <button class="mariposa" onclick="abrirInvitacion()">🦋</button>
+
+    <p>Toca la mariposa para descubrir la sorpresa</p>
+
+</section>
+
+<!-- PANTALLA 2 -->
+<section id="fiesta" class="pantalla">
+
+    <div class="luces"></div>
+
+    <h1>¡Vamos a celebrar!</h1>
+
+    <p>Una ocasión especial merece una celebración inolvidable ✨</p>
+
+    <button class="boton" onclick="mostrarInvitacion()">
+        Ver invitación 💌
+    </button>
+
+</section>
+
+<!-- PANTALLA 3 -->
+<section id="invitacion" class="pantalla">
+
+    <article class="tarjeta">
+
+        <div class="decoracion">✧ 🦋 ✧</div>
+
+        <p>ESTÁS CORDIALMENTE INVITADO/A</p>
+
+        <h1>Mariana<br>Galarza Gonzalez</h1>
+
+        <h2>¡Celebra mis 21 años!</h2>
+
+        <p>
+            Hay momentos que se vuelven inolvidables cuando los
+            compartimos con personas especiales. Me encantaría
+            que me acompañaras a celebrar este día tan importante
+            para mí. 💜
+        </p>
+
+        <div class="datos">
+            <strong>📅 FECHA</strong>
+            Domingo, 20 de diciembre de 2026
+        </div>
+
+        <div class="datos">
+            <strong>🕒 HORA</strong>
+            3:00 p. m.
+        </div>
+
+        <div class="datos">
+            <strong>📍 LUGAR</strong>
+            Mi casa
+        </div>
+
+        <p class="despedida">
+            ¡Te espero para compartir una tarde maravillosa!
+        </p>
+
+        <div class="respuesta">
+
+            <h3>¿Aceptas esta invitación? 💌</h3>
+
+            <input
+                type="text"
+                id="nombreInvitado"
+                placeholder="Escribe tu nombre"
+                maxlength="80"
+                autocomplete="name"
+            >
+
+            <div class="botones">
+
+                <button class="boton si" id="botonSi" onclick="aceptar()">
+                    ¡Sí, allí estaré! 💜
+                </button>
+
+                <button class="boton no" id="botonNo" onclick="rechazar()">
+    No puedo asistir
+</button>
+
+            </div>
+
+            <p id="mensajeRespuesta"></p>
+
+        </div>
+
+        <div class="decoracion">♡ ✧ ♡</div>
+
+    </article>
+
+</section>
+
+<script>
+
+// CAMBIAR DE PANTALLA
+function cambiarPantalla(id) {
+
+    document.querySelectorAll('.pantalla').forEach(p => {
+        p.classList.remove('activa');
+    });
+
+    document.getElementById(id).classList.add('activa');
+
+}
+
+// PRIMERA PANTALLA
+function abrirInvitacion() {
+
+    cambiarPantalla('fiesta');
+
+    const musica = document.getElementById('musica');
+
+    musica.play().catch(() => {
+        console.log("El navegador necesita activar la música manualmente.");
+    });
+
+}
+
+// SEGUNDA PANTALLA
+function mostrarInvitacion() {
+
+    cambiarPantalla('invitacion');
+
+}
+
+// RESPUESTA SÍ: ENVÍO AL CORREO
+async function aceptar() {
+
+    const nombreInput = document.getElementById("nombreInvitado");
+    const mensaje = document.getElementById("mensajeRespuesta");
+    const boton = document.getElementById("botonSi");
+
+    const nombre = nombreInput.value.trim();
+
+    if (!nombre) {
+        mensaje.textContent = "Por favor, escribe tu nombre para confirmar. 💜";
+        nombreInput.focus();
+        return;
+    }
+
+    boton.disabled = true;
+    boton.textContent = "Enviando confirmación...";
+
+    try {
+
+        const respuesta = await fetch(
+            "https://formsubmit.co/ajax/mariana.galarza.gon@gmail.com",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    Nombre: nombre,
+                    Confirmacion: "¡Sí asistiré!",
+                    Evento: "Cumpleaños 21 de Mariana",
+                    Fecha: "20 de diciembre de 2026",
+                    Hora: "3:00 p. m.",
+                    Lugar: "Mi casa",
+                    _subject: "Nueva confirmación para el cumpleaños de Mariana",
+                    _template: "table"
+                })
+            }
+        );
+
+        const resultado = await respuesta.json();
+
+        if (!respuesta.ok || String(resultado.success) !== "true") {
+            throw new Error(resultado.message || "No se pudo enviar el formulario.");
+        }
+
+        mensaje.innerHTML = `
+            <div class="mensaje-exito">
+                <h3>¡Qué alegría! 💜🦋</h3>
+                <p>
+                    ¡Gracias, ${escaparHTML(nombre)}!<br>
+                    Tu confirmación ha sido recibida.<br>
+                    ¡Te esperamos para celebrar juntos mis 21 años! 🎉
+                </p>
+            </div>
+        `;
+
+        nombreInput.disabled = true;
+        boton.textContent = "¡Confirmación enviada! 💜";
+
+    } catch (error) {
+
+        console.error("Error al enviar:", error);
+
+        mensaje.textContent =
+            "No se pudo enviar. " + error.message +
+            " Revisa tu conexión o la activación de FormSubmit. 💜";
+
+        boton.disabled = false;
+        boton.textContent = "¡Sí, allí estaré! 💜";
+
+    }
+
+}
+
+// PROTEGER EL NOMBRE AL MOSTRARLO
+function escaparHTML(texto) {
+
+    return texto.replace(/[&<>"']/g, caracter => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+    })[caracter]);
+
+}
+
+// RESPUESTA NO
+function rechazar() {
+
+    const mensaje = document.getElementById('mensajeRespuesta');
+
+    mensaje.innerHTML =
+        "¡Gracias por responder! Te enviamos mucho cariño. 💜";
+
+}
+
+// CREAR GLOBOS
+const colores = [
+    '#f4d9f7',
+    '#e8c8ff',
+    '#f8e8ff',
+    '#c8b0ed',
+    '#f5d3e8'
+];
+
+for (let i = 0; i < 12; i++) {
+
+    let globo = document.createElement('div');
+
+    globo.className = 'globo';
+
+    globo.style.left = Math.random() * 100 + '%';
+
+    globo.style.setProperty('--color', colores[i % colores.length]);
+
+    globo.style.setProperty('--duracion', (9 + Math.random() * 8) + 's');
+
+    globo.style.setProperty('--retraso', (-Math.random() * 15) + 's');
+
+    document.getElementById('fiesta').appendChild(globo);
+
+}
+
+// CREAR CONFETI
+for (let i = 0; i < 75; i++) {
+
+    let confeti = document.createElement('div');
+
+    confeti.className = 'confeti';
+
+    confeti.style.setProperty('--x', Math.random() * 100 + '%');
+
+    confeti.style.setProperty('--color', colores[i % colores.length]);
+
+    confeti.style.setProperty('--duracion', (4 + Math.random() * 5) + 's');
+
+    confeti.style.setProperty('--retraso', (-Math.random() * 8) + 's');
+
+    document.getElementById('fiesta').appendChild(confeti);
+
+}
+
+</script>
+
+</body>
+</html>
